@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Blog - PunkNews{% endblock title %}
+{% block blogsactive %} active {% endblock blogsactive %}
+{% block body %} 
+   <div class="container">
+   
+    <h1 class="m-5"> Your Search Results: </h2>
+    {% if searchPost|length < 1 %}
+      <h4 class="m-5"> Your Search Query: {{query}} Didn't Found</h4>
+    {% endif %}
+<div class="col">
+    <div class="row">
+    {% for Post in searchPost %}
+    
+    <div class="card m-3" style="width: 18rem;">
+  <img src="/media/{{Post.featureimg}}" class="card-img-top" alt="">
+  <div class="card-body">
+    <h5 class="card-title">{{Post.title}}</h5>
+    <div class="mb-1 text-muted">{{Post.timestamp}}</div>
+    <a href="/{{Post.slug}}" class="btn btn-primary">Read More</a>
+  </div>
+</div>
+
+      {% endfor %}
+      </div>
+</div>
+   </div>
+
+ {% endblock body %}

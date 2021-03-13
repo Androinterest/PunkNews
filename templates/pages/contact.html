@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Contact Us{% endblock title %}
+{% block contactactive %} active {% endblock contactactive %}
+{% block body %} 
+ 
+<div class="container">
+    <br>
+   <h3> Contact PunkNews</h3>
+   <br>
+   <form action="/contact" method="post"> {% csrf_token %}
+      <div class="input-group mb-3">
+  <span class="input-group-text" id="name">Name</span>
+  <input type="text" class="form-control" name="name" id="name" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+</div>
+    <div class="input-group mb-3">
+  <span class="input-group-text" id="emailhelp">Email</span>
+  <input type="email" class="form-control" id="email" name="email" aria-label="Sizing example input" aria-describedby="AboutEmail">
+</div>
+
+    <div class="input-group">
+  <span class="input-group-text">Your Message</span>
+  <textarea class="form-control" id="textfield" name="message" aria-label="With textarea" rows="6"></textarea>
+    </div> <br>
+    <button type="submit" class="btn btn-primary">Submit</button>
+   </from>
+
+</div>
+
+ {% endblock body %} 

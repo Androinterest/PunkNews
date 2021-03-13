@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Category: {{cat}} - PunkNews{% endblock title %}
+{% block body %}
+   <div class="container"><br><br>
+     <h2>Category: {{cat}}</h2>
+
+     <div class="col">
+     <div class="row">
+{% for c in catPost %}
+    <div class="card m-3" style="width: 18rem;">
+  <img src="/media/{{c.featureimg}}" class="card-img-top" alt="">
+  <div class="card-body">
+    <h5 class="card-title">{{c.title}}</h5>
+    <div class="mb-1 text-muted">{{c.timestamp}}</div>
+    <a href="/blog/{{c.slug}}" class="btn btn-primary">Read More</a>
+  </div>
+</div>
+      {% endfor %}
+   </div>
+   </div>
+
+{% endblock body %}
+
+
+

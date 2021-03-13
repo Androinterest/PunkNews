@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Blog - PunkNews{% endblock title %}
+{% block homeactive %}active{% endblock homeactive %}active
+{% block body %} 
+
+<div class="container-xl align-items-center">
+  <div class="row">
+    <div class="col-9">
+      <!-- First Column Start-->
+         <div class="col">
+      <div class="row">
+         {% for Post in allPosts %}
+    <div class="card m-3" style="width: 18rem;">
+  <img src="/media/{{Post.featureimg}}" class="card-img-top" alt="">
+  <div class="card-body">
+    <h5 class="card-title">{{Post.title}}</h5>
+    <div class="mb-1 text-muted">{{Post.timestamp}}</div>
+    <a href="blog/{{Post.slug}}" class="btn btn-primary">Read More</a>
+  </div>
+</div>
+          {% endfor %}
+
+      </div>
+       </div>
+      <!-- First Column End-->
+    </div>
+    <div class="col-sm my-3">
+      <div class="card" style="width: 18rem;">
+  <div class="card-header">
+    Categories
+  </div>
+  <ul class="list-group list-group-flush">
+  {% for p in allPosts %}<a href="/category/{{p.category}}">
+    <li class="list-group-item">{{p.category}}</li></a>
+    {% endfor %}
+  </ul>
+</div>
+    </div>
+  </div>
+</div>
+
+ {% endblock body %}

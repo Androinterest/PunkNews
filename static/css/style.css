@@ -1,0 +1,13 @@
+html,body{
+    scroll-behavior: smooth;
+}
+
+.modal-backdrop{
+    z-index: 1;
+}
+a{
+    text-decoration: none;
+}
+.navbar_icon{
+    fill: white;
+}

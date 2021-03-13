@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}{{post.title}} - PunkNews{% endblock title %}
+{% block blogsactive %} active {% endblock blogsactive %}
+{% block body %} 
+    <div class="container">
+     <article class="blog-post"><br>
+        <h2 class="blog-post-title">{{post.title}}</h2>
+        <p class="blog-post-meta">{{post.timestamp}} By <a href="/{{post.slug}}">{{post.author}}</a></p>
+        <img src="/media/{{post.featureimg}}" width="100%" height="100%" alt="{{post.title}}">
+        <p>{{post.content|safe}}</p>
+      </article>
+ {% endblock body %}

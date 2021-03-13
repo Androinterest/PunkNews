@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block title %}Edit Your Profile - PunkNews{% endblock title %}
+{% block body %}
+
+<!-- Your Profile End -->
+   <div class="container my-5 center">
+     <div class="card text-dark bg-light mb-3">
+  <div class="card-header"><strong> Your Profile: {{request.user.first_name}}</strong></div>
+  <div class="card-body">
+    <form method="post" action="/updateprofile" enctype="multipart/form-data">{% csrf_token %}
+        
+            <div class="input-group m-2 flex-nowrap">
+  <span class="input-group-text" id="nameHelp">Username</span>
+  <input type="text" class="form-control" placeholder="Username" aria-label="Username" value="{{request.user.username}}" name="username" aria-describedby="nameHelp" readonly>
+</div>   
+<div class="input-group m-2 flex-nowrap">
+  <span class="input-group-text" id="fnameHelp">First Name</span>
+  <input type="text" class="form-control" placeholder="First" aria-label="Username" name="fname"  value="{{request.user.first_name}}" aria-describedby="fnameHelp">
+</div>  
+<div class="input-group m-2 flex-nowrap">
+  <span class="input-group-text" id="lnameHelp">Last Name</span>
+  <input type="text" class="form-control" placeholder="Last" aria-label="Username" name="lname"  value="{{request.user.last_name}}"  aria-describedby="lnameHelp">
+</div>   
+<div class="input-group m-2 flex-nowrap">
+  <span class="input-group-text" id="emailHelp">Email</span>
+  <input type="email" class="form-control" placeholder="Email" aria-label="Email" name="email"  value="{{request.user.email}}" aria-describedby="emailHelp">
+</div>
+{% for u in udata %}
+<div class="input-group m-2 flex-nowrap">
+  <span class="input-group-text" id="phoneHelp">Phone</span>
+  <input type="text" class="form-control" placeholder="Phone Number" aria-label="Phone" name="phone"  value="{{u.phone}}" aria-describedby="phoneHelp">
+</div>
+<div class="input-group m-2 flex-nowrap">
+  <span class="input-group-text" id="ageHelp">Age</span>
+  <input type="text" class="form-control" placeholder="Age" aria-label="Phone" name="age"  value="{{u.age}}" aria-describedby="ageHelp">
+</div>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text">Profile Photo</span>
+  </div>
+  <div class="custom-file">
+    <input type="file" class="custom-file-input" name="profileimg" id="inputGroupFile01">
+  </div>
+</div>
+   {% endfor %}
+ <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+      </div>
+        </form>
+  </div>
+   </div>
+        </div>
+<!-- Your Profile End -->
+
+<div class="container my-5 center" id="changePassword">
+     <div class="card text-dark bg-light mb-3">
+  <div class="card-header"><strong> Change Password</strong></div>
+  <div class="card-body">
+    <form method="post" action="/change_pass">{% csrf_token %}
+<div class="input-group m-2 flex-nowrap">
+  <span class="input-group-text" id="passHelp">Current Password</span>
+  <input type="password" class="form-control" placeholder="Current Password" aria-label="CurPass" name="curPass"  value="{{u.phone}}" aria-describedby="passHelp" required>
+</div>
+<div class="input-group m-2 flex-nowrap">
+  <span class="input-group-text" id="newPass  Help">New Password</span>
+  <input type="password" class="form-control" placeholder="New Password" aria-label="newPass" name="newPass"  value="{{u.phone}}" aria-describedby="newPassHelp" required>
+</div>
+<div class="input-group m-2 flex-nowrap">
+  <span class="input-group-text" id="ConfPassHelp">Confirm Password</span>
+  <input type="password" class="form-control" placeholder="New Password" aria-label="ConfPass" name="confPass"  value="{{u.phone}}" aria-describedby="ConfPassHelp" required>
+</div>
+ <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Update Password</button>
+      </div>
+    </form>
+  </div>
+   </div>
+        </div>
+
+{% endblock body %}
+

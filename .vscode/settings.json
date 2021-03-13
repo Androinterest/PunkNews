@@ -1,0 +1,9 @@
+{
+    "editor.codeActionsOnSave": null,
+    "emmet.extensionsPath": "",
+    "emmet.excludeLanguages": [
+    
+        "markdown"
+    ],
+    "emmet.triggerExpansionOnTab": true,
+}

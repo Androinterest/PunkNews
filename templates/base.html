@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" >
+    <link href="/static/css/style.css" rel="stylesheet" >
+
+    <title>{% block title %}{% endblock title %}</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+        <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <a class="navbar-brand center" href="/">
+      <img src="/media/logo/punknews.png" alt="" width="100" height="35">
+    </a>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link {% block homeactive %} {% endblock homeactive %}" aria-current="page" href="/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {% block aboutactive %} {% endblock aboutactive %}" href="/about">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {% block contactactive %} {% endblock contactactive %}" href="/contact">Contact</a>
+              </li>
+            </ul>
+            <form method="get" action="/search" class="d-flex">
+              <input class="form-control me-2" type="search" name="q" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+
+            <!-- Button trigger modal -->
+            {% if user.is_authenticated %}
+                 <li class="nav-item dropdown">
+          <a class="nav-link btn btn-primary mx-3 dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Welcome! {{request.user.first_name}}
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="/account">My Account</a></li>
+            <li><a class="dropdown-item" href="/editprofile">Edit Profile</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+          </ul>
+        </li>
+        {% else %}
+        <button type="button" class="btn btn-primary ml-2 my- mx-1" data-bs-toggle="modal" data-bs-target="#exampleModal">Signup</button>
+        <button type="button" class="btn btn-primary my-2 mx-1" data-bs-toggle="modal" data-bs-target="#exampleModal1">Login</button>
+        {% endif %}
+        
+<!-- Signup Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Signup</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="/signup">{% csrf_token %}
+        
+            <div class="input-group m-2 flex-nowrap">
+  <span class="input-group-text" id="nameHelp">Username</span>
+  <input type="text" class="form-control" placeholder="Name" aria-label="Username" name="username" aria-describedby="nameHelp">
+</div>   
+<div class="input-group m-2 flex-nowrap">
+  <span class="input-group-text" id="fnameHelp">First Name</span>
+  <input type="text" class="form-control" placeholder="Name" aria-label="Username" name="fname" aria-describedby="fnameHelp">
+</div>  
+<div class="input-group m-2 flex-nowrap">
+  <span class="input-group-text" id="lnameHelp">Last Name</span>
+  <input type="text" class="form-control" placeholder="Name" aria-label="Username" name="lname" aria-describedby="lnameHelp">
+</div>   
+<div class="input-group m-2 flex-nowrap">
+  <span class="input-group-text" id="emailHelp">Email</span>
+  <input type="email" class="form-control" placeholder="Email" aria-label="Email" name="email" aria-describedby="emailHelp">
+</div>
+<div class="input-group m-2 flex-nowrap">
+  <span class="input-group-text" id="phoneHelp">Phone</span>
+  <input type="text" class="form-control" placeholder="Phone Number" aria-label="Phone" name="phone" aria-describedby="phoneHelp">
+</div>
+<div class="input-group m-2 flex-nowrap">
+  <span class="input-group-text" id="passHelp">Password</span>
+  <input type="Password" class="form-control" placeholder="Password" aria-label="Password" name="password" aria-describedby="passHelp">
+</div>
+ <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Signup Now</button>
+      </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+          </div>
+        </div>
+
+<!--Login Modal -->
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="/login">{% csrf_token %}
+        
+            <div class="input-group m-2 flex-nowrap">
+  <span class="input-group-text" id="nameHelp">Username</span>
+  <input type="text" class="form-control" placeholder="Name" aria-label="Username" name="loginusername" aria-describedby="nameHelp">
+</div>   
+<div class="input-group m-2 flex-nowrap">
+  <span class="input-group-text" id="passHelp">Password</span>
+  <input type="Password" class="form-control" placeholder="Password" aria-label="Password" name="loginpassword" aria-describedby="passHelp">
+</div>
+ <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Login Now</button>
+      </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+          </div>
+        </div>
+      </nav>
+       {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+  <strong></strong> {{ message }}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div> {% endfor %}
+      {% block body %} {% endblock body %}
+    <script src="/static/js/bootstrap.min.js"></script>
+  </body>
+</html>

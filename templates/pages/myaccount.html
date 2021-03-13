@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %} My Account - PunkNews{% endblock title %}
+
+{% block body %}
+  <div class="container my-3">
+  {% for u in udata %}
+  <div class="card text-dark bg-light mb-3" style="max-width: 100%;">
+  <div class="card-header">Your Profile</div>
+  <div class="card-body">
+    <img class="rounded-circle" width="100rem" src="/media/{{u.profileimg}}" alt=""><br><br>
+    <h5 class="card-title">Hello! {{user.first_name}}</h5>
+    <p class="card-text"><b>Your Email - </b>{{user.email}}</p>
+    <p class="card-text"><b>Your Phone - </b>{{u.phone}}</p><br><br>
+    <a href="/editprofile" class="btn btn-primary">Edit Profile</a>
+    <a href="/editprofile#changePassword" class="btn btn-primary">Change Password</a>
+  </div>
+   </div>
+   {% endfor %}
+  </div>
+{% endblock body %}
